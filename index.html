@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>武汉楷恩医院 - 医疗健康数据可视化大�?/title>
+    <script type="module" crossorigin src="./assets/index-BTnxb3R2.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/styled-components.browser.esm-Bm7Ec8n0.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-BqUGFa-p.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  <style>
+  /* Mobile controls */
+  #mobile-controls { display: none; }
+  @media (max-width: 768px) {
+    #mobile-controls { display: flex; flex-direction: column; gap: 8px; position: fixed; bottom: 24px; right: 16px; z-index: 9999; }
+    #mobile-controls button {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(59,130,246,0.85); border: 1px solid rgba(232,197,71,0.4);
+      color: #fff; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      -webkit-tap-highlight-color: transparent; user-select: none;
+    }
+    #mobile-controls .btn-reset {
+      width: auto; padding: 0 14px; border-radius: 20px;
+      background: rgba(232,197,71,0.85); border: none; color: #050a18;
+      font-size: 12px; font-weight: 600;
+    }
+  }
+</style>
+<div id="mobile-controls">
+  <button id="btn-zoom-in" aria-label="�Ŵ�">+</button>
+  <button id="btn-zoom-out" aria-label="��С">?</button>
+  <button class="btn-reset" id="btn-reset">����Ӧ</button>
+</div>
+<script>
+(function() {
+  var isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    var root = document.getElementById('root');
+    var zoomIn = document.getElementById('btn-zoom-in');
+    var zoomOut = document.getElementById('btn-zoom-out');
+    var resetBtn = document.getElementById('btn-reset');
+    var scale = 1;
+    function applyZoom() {
+      scale = Math.max(0.25, Math.min(3, scale));
+      root.style.transformOrigin = '0 0';
+      root.style.transform = 'scale(' + scale + ')';
+      root.style.width = (100 / scale) + '%';
+    }
+    zoomIn.onclick = function() { scale += 0.25; applyZoom(); };
+    zoomOut.onclick = function() { scale -= 0.25; applyZoom(); };
+    resetBtn.onclick = function() { scale = 1; root.style.transform = ''; root.style.width = ''; };
+  }
+})();
+</script>
+</body>
+</html>
